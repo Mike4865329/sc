@@ -19,15 +19,13 @@ app.get('/:resolution/*', async (req, res) => {
       height: parseInt(viewportHeight),
     });
 
-    const resolvedUrl = url.resolve('https://', targetUrl);
-    await page.goto(resolvedUrl);
+    await page.goto(targetUrl);
 
     // Capture screenshot
     const screenshot = await page.screenshot();
 
     // Set response headers
     res.setHeader('Content-Type', 'image/png');
-    res.setHeader('Content-Disposition', 'attachment; filename=screenshot.png');
 
     // Send the screenshot to the client
     res.send(screenshot);
